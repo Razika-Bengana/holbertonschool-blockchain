@@ -34,7 +34,10 @@ typedef struct sig_s
 
 
 /* task 0 */
-uint8_t *sha256(int8_t const *s, size_t len, uint8_t digest[SHA256_DIGEST_LENGTH]);
+uint8_t *sha256(int8_t const *s, size_t len,
+		uint8_t digest[SHA256_DIGEST_LENGTH]);
+
+/* task 1 */
 
 
 #endif /* HBLK_CRYPTO_H */
