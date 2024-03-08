@@ -3,6 +3,7 @@
 
 #include <openssl/sha.h>
 #include <stdint.h>
+#include <stdio.h>
 
 
 # define EC_CURVE   NID_secp256k1
