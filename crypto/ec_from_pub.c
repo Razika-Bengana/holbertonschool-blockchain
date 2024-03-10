@@ -10,15 +10,20 @@
 
 EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 {
+	EC_KEY *key;
+	EC_GROUP *group;
+	EC_POINT *point;
+
+
 	if (pub == NULL)
 		return (NULL);
 
-	EC_KEY *key = EC_KEY_new_by_curve_name(EC_CURVE);
+	key = EC_KEY_new_by_curve_name(EC_CURVE);
 
 	if (key == NULL)
 		return (NULL);
 
-	EC_GROUP *group = EC_GROUP_new_by_curve_name(EC_CURVE);
+	group = EC_GROUP_new_by_curve_name(EC_CURVE);
 
 	if (group == NULL)
 	{
@@ -26,7 +31,7 @@ EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 		return (NULL);
 	}
 
-	EC_POINT *point = EC_POINT_new(group);
+	point = EC_POINT_new(group);
 
 	if (point == NULL)
 	{
