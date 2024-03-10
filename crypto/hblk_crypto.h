@@ -62,5 +62,8 @@ int ec_save(EC_KEY *key, char const *folder);
 /* task 4 */
 int ec_save(EC_KEY *key, char const *folder);
 
+/* task 5 */
+EC_KEY *ec_load(char const *folder);
+
 
 #endif /* HBLK_CRYPTO_H */
