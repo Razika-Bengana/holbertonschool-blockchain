@@ -43,5 +43,8 @@ uint8_t *sha256(int8_t const *s, size_t len,
 /* task 1 */
 EC_KEY *ec_create(void);
 
+/* task 2 */
+uint8_t *ec_to_pub(EC_KEY const *key, uint8_t pub[EC_PUB_LEN]);
+
 
 #endif /* HBLK_CRYPTO_H */
