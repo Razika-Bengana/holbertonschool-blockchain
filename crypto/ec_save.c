@@ -12,9 +12,6 @@
 
 int ec_save(EC_KEY *key, const char *folder)
 {
-	FILE *priv_key_file;
-	FILE *pub_key_file;
-
 	if (!key || !folder)
 	{
 		return (0);
@@ -23,7 +20,7 @@ int ec_save(EC_KEY *key, const char *folder)
 	{
 		return (0);
 	}
-	priv_key_file = fopen(folder, "/key.pem");
+	FILE *priv_key_file = fopen(folder, "/key.pem");
 
 	if (!priv_key_file)
 	{
@@ -36,7 +33,7 @@ int ec_save(EC_KEY *key, const char *folder)
 	}
 	fclose(priv_key_file);
 
-	pub_key_file = fopen(folder, "/key_pub.pem");
+	FILE *pub_key_file = fopen(folder, "/key_pub.pem");
 
 	if (!pub_key_file)
 	{
