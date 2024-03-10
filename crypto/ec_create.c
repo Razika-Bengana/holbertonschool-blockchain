@@ -3,7 +3,7 @@
 /**
  * ec_create - program that creates a new EC key pair
  *
- * You have to use the secp256k1 elliptic curve to create the new pair (See EC_CURVE macro)
+ * We have to use the secp256k1 elliptic curve to create the new pair (See EC_CURVE macro)
  *
  * Return: a pointer to an EC_KEY structure, containing both the public and private keys, or NULL upon failure
  */
