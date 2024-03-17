@@ -2,7 +2,6 @@
 #define BLOCKCHAIN_H
 
 
-
 #include <llist.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +9,7 @@
 #include <stdint.h>
 #include <time.h>
 #include <openssl/sha.h>
+#include "./provided/endianness.h"
 
 
 
@@ -115,6 +115,8 @@ uint8_t *block_hash(block_t const *block,
 		    uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
 
 /* task 5 */
+int write_block_to_file(llist_node_t node, unsigned int idx, void *arg);
+int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 
 /* task 6 */
 
