@@ -27,13 +27,14 @@
 block_t *block_create(block_t const *prev, int8_t const *data,
 		      uint32_t data_len)
 {
-	block_t *block = calloc(1, sizeof(block_t));
 
 	if (!prev || !data)
 	{
 		fprintf(stderr, "block_create: Invalid input parameters.\n");
 		return (NULL);
 	}
+
+	block_t *block = calloc(1, sizeof(block_t));
 
 	if (!block)
 	{
@@ -45,6 +46,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	block->info.difficulty = 0;
 	block->info.nonce = 0;
 	block->info.timestamp = (uint64_t)time(NULL);
+
 	memcpy(block->info.prev_hash, prev->hash, SHA256_DIGEST_LENGTH);
 
 	block->data.len = data_len > BLOCKCHAIN_DATA_MAX ? BLOCKCHAIN_DATA_MAX : data_len;
