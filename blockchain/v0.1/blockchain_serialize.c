@@ -16,6 +16,7 @@ int write_block_to_file(llist_node_t node, unsigned int idx, void *arg)
 	FILE *file;
 
 	(void)idx;
+
 	file = (FILE *)arg;
 	block = (block_t *)node;
 
