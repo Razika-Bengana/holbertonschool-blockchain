@@ -34,8 +34,9 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 	char hblk_version;
 	uint8_t hblk_endian;
 	uint32_t num_blocks;
+	FILE *file;
 
-	FILE *file = fopen(path, "wb");
+	file = fopen(path, "wb");
 
 	if (file == NULL)
 	{
