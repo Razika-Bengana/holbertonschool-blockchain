@@ -28,7 +28,6 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 		      uint32_t data_len)
 {
 	block_t *block = calloc(1, sizeof(block_t));
-	block->data.len = data_len > BLOCKCHAIN_DATA_MAX ? BLOCKCHAIN_DATA_MAX : data_len;
 
 	if (!prev || !data)
 	{
@@ -48,6 +47,9 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	block->info.timestamp = (uint64_t)time(NULL);
 
 	memcpy(block->info.prev_hash, prev->hash, SHA256_DIGEST_LENGTH);
+
+	block->data.len = data_len > BLOCKCHAIN_DATA_MAX ?
+		BLOCKCHAIN_DATA_MAX : data_len;
 
 	memcpy(block->data.buffer, data, block->data.len);
 	memset(block->hash, 0, SHA256_DIGEST_LENGTH);
