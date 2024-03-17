@@ -105,6 +105,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 		      uint32_t data_len);
 
 /* task 2 */
+void block_destroy(block_t *block);
 
 /* task 3 */
 
