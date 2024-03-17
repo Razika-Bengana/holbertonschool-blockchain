@@ -111,7 +111,8 @@ void block_destroy(block_t *block);
 void blockchain_destroy(blockchain_t *blockchain);
 
 /* task 4 */
-uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
+uint8_t *block_hash(block_t const *block,
+		    uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
 
 /* task 5 */
 
