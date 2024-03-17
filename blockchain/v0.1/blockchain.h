@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <time.h>
 #include <openssl/sha.h>
 
 
@@ -100,6 +101,7 @@ typedef struct block_s
 blockchain_t *blockchain_create(void);
 
 /* task 1 */
+block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_len);
 
 /* task 2 */
 
