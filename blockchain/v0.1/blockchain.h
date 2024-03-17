@@ -108,6 +108,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 void block_destroy(block_t *block);
 
 /* task 3 */
+void blockchain_destroy(blockchain_t *blockchain);
 
 /* task 4 */
 
