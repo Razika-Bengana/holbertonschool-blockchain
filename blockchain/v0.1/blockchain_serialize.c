@@ -58,7 +58,6 @@ int write_block_to_file(llist_node_t node, unsigned int idx, void *arg)
 int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 {
 	FILE *file;
-	int err = 0;
 	char hblk_magic[] = {'H', 'B', 'L', 'K', '\0'};
 	char hblk_version[] = {'1', '.', '0', '\0'};
 	uint8_t hblk_endian;
