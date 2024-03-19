@@ -82,5 +82,5 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 
 	fclose(file);
 
-	return 0;
+	return (0);
 }
