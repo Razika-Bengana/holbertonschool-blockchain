@@ -119,6 +119,9 @@ int write_block_to_file(llist_node_t node, unsigned int idx, void *arg);
 int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 
 /* task 6 */
+FILE *open_and_verify_file(char const *path, uint32_t *num_blocks);
+blockchain_t *build_blockchain(FILE *fp, uint32_t num_blocks);
+blockchain_t *blockchain_deserialize(char const *path);
 
 /* task 7 */
 
