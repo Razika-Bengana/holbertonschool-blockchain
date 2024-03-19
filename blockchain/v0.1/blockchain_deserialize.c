@@ -101,6 +101,7 @@ blockchain_t *read_blocks_and_build_blockchain(FILE *file)
 blockchain_t *blockchain_deserialize(char const *path)
 {
 	FILE *file;
+	blockchain_t *blockchain;
 
 	file = open_and_verify_file(path);
 
@@ -109,7 +110,7 @@ blockchain_t *blockchain_deserialize(char const *path)
 		return (NULL);
 	}
 
-	blockchain_t *blockchain = read_blocks_and_build_blockchain(file);
+	blockchain = read_blocks_and_build_blockchain(file);
 
 	fclose(file);
 
