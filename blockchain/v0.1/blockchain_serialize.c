@@ -58,9 +58,9 @@ int write_block_to_file(llist_node_t node, unsigned int idx, void *arg)
 int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 {
 	FILE *file;
-	int err;
-	char hblk_magic[];
-	char hblk_version[];
+	int err = 0;
+	char hblk_magic[] = {'H', 'B', 'L', 'K', '\0'};
+	char hblk_version[] = {'1', '.', '0', '\0'};
 	uint8_t hblk_endian;
 	uint32_t num_blocks;
 
@@ -71,20 +71,17 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 		return (-1);
 	}
 
-	hblk_magic[] = {'H', 'B', 'L', 'K'};
-	hblk_version[] = {'1', '.', '0'};
 	hblk_endian = _get_endianness();
 	num_blocks = llist_size(blockchain->chain);
 
-	fwrite(hblk_magic, sizeof(char), sizeof(hblk_magic) / sizeof(char), file);
-	fwrite(hblk_version, sizeof(char),
-	       sizeof(hblk_version) / sizeof(char), file);
-	fwrite(&hblk_endian, sizeof(uint8_t), 1, file);
-	fwrite(&num_blocks, sizeof(uint32_t), 1, file);
+	fwrite(hblk_magic, sizeof(char), sizeof(hblk_magic) - 1, file);
+	fwrite(hblk_version, sizeof(char), sizeof(hblk_version) - 1, file);
+	fwrite(&hblk_endian, sizeof(hblk_endian), 1, file);
+	fwrite(&num_blocks, sizeof(num_blocks), 1, file);
 
 	llist_for_each(blockchain->chain, write_block_to_file, file);
 
 	fclose(file);
 
-	return (0);
+	return 0;
 }
