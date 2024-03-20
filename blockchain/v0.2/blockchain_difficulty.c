@@ -46,8 +46,7 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 		}
 		else if (actual_time > expected_time * 2)
 		{
-			return (latest_block->info.difficulty > 0 ?
-			latest_block->info.difficulty - 1 : 0);
+			return (latest_block->info.difficulty > 0 ? latest_block->info.difficulty - 1 : 0);
 		}
 	}
 
