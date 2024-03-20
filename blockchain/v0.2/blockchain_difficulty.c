@@ -22,19 +22,16 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 		return (0);
 	}
 
-	latest_block = llist_get_node_at(blockchain->chain,
-					 llist_size(blockchain->chain) - 1);
+	latest_block = llist_get_node_at(blockchain->chain, llist_size(blockchain->chain) - 1);
 
 	if (latest_block == NULL)
 	{
 		return (0);
 	}
 
-	if ((latest_block->info.index + 1) % DIFFICULTY_ADJUSTMENT_INTERVAL == 0 &&
-		latest_block->info.index != 0)
+	if ((latest_block->info.index + 1) % DIFFICULTY_ADJUSTMENT_INTERVAL == 0 && latest_block->info.index != 0)
 	{
-		adjusted_block = llist_get_node_at(blockchain->chain,
-						   llist_size(blockchain->chain) - DIFFICULTY_ADJUSTMENT_INTERVAL);
+		adjusted_block = llist_get_node_at(blockchain->chain, llist_size(blockchain->chain) - DIFFICULTY_ADJUSTMENT_INTERVAL);
 
 		expected_time = BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL;
 		actual_time = latest_block->info.timestamp - adjusted_block->info.timestamp;
@@ -44,10 +41,10 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 		{
 			return (latest_block->info.difficulty + 1);
 		}
+
 		else if (actual_time > expected_time * 2)
 		{
-			return (latest_block->info.difficulty > 0 ?
-			latest_block->info.difficulty - 1 : 0);
+			return (latest_block->info.difficulty > 0 ? latest_block->info.difficulty - 1 : 0);
 		}
 	}
 
