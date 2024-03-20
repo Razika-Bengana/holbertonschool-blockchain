@@ -34,7 +34,8 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 		latest_block->info.index != 0)
 	{
 		adjusted_block = llist_get_node_at(blockchain->chain,
-						   llist_size(blockchain->chain) - DIFFICULTY_ADJUSTMENT_INTERVAL);
+						   llist_size(blockchain->chain) -
+						   DIFFICULTY_ADJUSTMENT_INTERVAL);
 
 		expected_time = BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL;
 		actual_time = latest_block->info.timestamp - adjusted_block->info.timestamp;
@@ -46,7 +47,8 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 		}
 		else if (actual_time > expected_time * 2)
 		{
-			return (latest_block->info.difficulty > 0 ? latest_block->info.difficulty - 1 : 0);
+			return (latest_block->info.difficulty > 0 ?
+			latest_block->info.difficulty - 1 : 0);
 		}
 	}
 
