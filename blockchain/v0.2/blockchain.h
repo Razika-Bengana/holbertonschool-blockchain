@@ -141,8 +141,13 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 			    uint32_t difficulty);
 
 /* task 1 */
+int block_is_valid(block_t const *block, block_t const *prev_block);
 
+/* task 2 */
+void block_mine(block_t *block);
 
+/* task 3 */
+uint32_t blockchain_difficulty(blockchain_t const *blockchain);
 
 
 
