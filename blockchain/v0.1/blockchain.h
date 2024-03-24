@@ -8,6 +8,8 @@
 #include <string.h>
 #include <stdint.h>
 #include <time.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <openssl/sha.h>
 #include "./provided/endianness.h"
 
@@ -45,6 +47,8 @@ typedef struct block_info_s
 
 
 #define BLOCKCHAIN_DATA_MAX 1024
+#define HBLK_MAG "HBLK"
+#define HBLK_VER "0.1"
 
 
 
@@ -119,9 +123,11 @@ int write_block_to_file(llist_node_t node, unsigned int idx, void *arg);
 int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 
 /* task 6 */
-FILE *open_and_verify_file(char const *path);
-blockchain_t *read_blocks_and_build_blockchain(FILE *file);
 blockchain_t *blockchain_deserialize(char const *path);
+static int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
+				       uint8_t encoding, uint32_t num_blocks);
+static void bswap(uint8_t *p, size_t size);
+int read_attribute(int fd, int encoding, void *attr, size_t size);
 
 /* task 7 */
 
