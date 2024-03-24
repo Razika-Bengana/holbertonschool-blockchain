@@ -1,7 +1,7 @@
 #include <blockchain.h>
 
-static int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
-				       uint8_t encoding, uint32_t num_blocks);
+int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
+				uint8_t encoding, uint32_t num_blocks);
 
 /**
  * blockchain_deserialize - program that deserializes a blockchain from a file
@@ -18,23 +18,23 @@ blockchain_t *blockchain_deserialize(char const *path)
 	uint8_t encoding;
 	uint32_t num_blocks;
 	blockchain_t *blockchain;
-	ssize_t bytes_read;
+	size_t bytes_read;
 
 	if (fd == -1)
 		return (NULL);
 
-	bytes_read = read(fd, buf, sizeof(HBLK_MAGIC) - 1);
+	bytes_read = read(fd, buf, sizeof(HBLK_MAG) - 1);
 
-	if (bytes_read < (ssize_t)sizeof(HBLK_MAGIC) - 1 ||
-	memcmp(buf, HBLK_MAGIC, sizeof(HBLK_MAGIC) - 1) != 0)
+	if (bytes_read < (ssize_t)sizeof(HBLK_MAG) - 1 ||
+	memcmp(buf, HBLK_MAG, sizeof(HBLK_MAG) - 1) != 0)
 	{
 		close(fd);
 		return (NULL);
 	}
 
-	bytes_read = read(fd, buf, sizeof(HBLK_VERSION) - 1);
+	bytes_read = read(fd, buf, sizeof(HBLK_VER) - 1);
 
-	if (bytes_read < (ssize_t)sizeof(HBLK_VERSION) - 1)
+	if (bytes_read < (ssize_t)sizeof(HBLK_VER) - 1)
 	{
 		close(fd);
 		return (NULL);
@@ -78,8 +78,8 @@ blockchain_t *blockchain_deserialize(char const *path)
  * Return: 1 on success, 0 on failure.
  */
 
-static int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
-				       uint8_t encoding, uint32_t num_blocks)
+int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
+				uint8_t encoding, uint32_t num_blocks)
 {
 	(void) blockchain;
 	block_t *block;
@@ -124,7 +124,7 @@ static int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
  * Return: nothing (void)
  */
 
-static void bswap(uint8_t *p, size_t size)
+void bswap(uint8_t *p, size_t size)
 {
 	uint8_t buf[64] = {0};
 	int i;
