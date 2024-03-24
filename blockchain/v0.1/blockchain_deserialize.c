@@ -87,6 +87,7 @@ int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
 	while (num_blocks--)
 	{
 		block = calloc(1, sizeof(block_t));
+
 		if (!block ||
 		    !read_attribute(fd, encoding, &block->info.index,
 				    sizeof(block->info.index)) ||
