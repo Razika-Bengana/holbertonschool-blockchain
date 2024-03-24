@@ -18,16 +18,31 @@ blockchain_t *blockchain_deserialize(char const *path)
 	uint8_t encoding;
 	uint32_t num_blocks;
 	blockchain_t *blockchain;
+	ssize_t bytes_read;
 
 	if (fd == -1)
 		return (NULL);
 
-	if (read(fd, buf, sizeof(HBLK_MAGIC) - 1) <
-	(ssize_t)sizeof(HBLK_MAGIC) - 1 ||
-	memcmp(buf, HBLK_MAGIC, sizeof(HBLK_MAGIC) - 1) ||
-	read(fd, buf, sizeof(HBLK_VERSION) - 1) <
-	(ssize_t)sizeof(HBLK_VERSION) - 1 ||
-	!(blockchain = blockchain_create()))
+	bytes_read = read(fd, buf, sizeof(HBLK_MAGIC) - 1);
+
+	if (bytes_read < (ssize_t)sizeof(HBLK_MAGIC) - 1 ||
+	memcmp(buf, HBLK_MAGIC, sizeof(HBLK_MAGIC) - 1) != 0)
+	{
+		close(fd);
+		return (NULL);
+	}
+
+	bytes_read = read(fd, buf, sizeof(HBLK_VERSION) - 1);
+
+	if (bytes_read < (ssize_t)sizeof(HBLK_VERSION) - 1)
+	{
+		close(fd);
+		return (NULL);
+	}
+
+	blockchain = blockchain_create();
+
+	if (!blockchain)
 	{
 		close(fd);
 		return (NULL);
@@ -66,6 +81,7 @@ blockchain_t *blockchain_deserialize(char const *path)
 static int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
 				       uint8_t encoding, uint32_t num_blocks)
 {
+	(void) blockchain;
 	block_t *block;
 
 	while (num_blocks--)
@@ -136,6 +152,9 @@ static void bswap(uint8_t *p, size_t size)
 
 int read_attribute(int fd, int encoding, void *attr, size_t size)
 {
+	(void) encoding;
+	(void) fd;
+
 	if (read(fd, attr, size) != (ssize_t)size)
 		return (0);
 
