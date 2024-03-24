@@ -13,12 +13,14 @@ int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
 
 blockchain_t *blockchain_deserialize(char const *path)
 {
-	int fd = open(path, O_RDONLY);
+	int fd;
 	unsigned char buf[sizeof(block_t)];
 	uint8_t encoding;
 	uint32_t num_blocks;
 	blockchain_t *blockchain;
 	size_t bytes_read;
+
+	fd = open(path, O_RDONLY);
 
 	if (fd == -1)
 		return (NULL);
