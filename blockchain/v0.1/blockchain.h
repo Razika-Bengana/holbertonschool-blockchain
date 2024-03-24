@@ -50,6 +50,12 @@ typedef struct block_info_s
 #define HBLK_MAG "HBLK"
 #define HBLK_VER "0.1"
 
+#define LSB 1
+#define MSB 2
+
+#define true 1
+#define false 0
+
 
 
 /**
@@ -124,9 +130,9 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 
 /* task 6 */
 blockchain_t *blockchain_deserialize(char const *path);
-static int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
-				       uint8_t encoding, uint32_t num_blocks);
-static void bswap(uint8_t *p, size_t size);
+int load_blocks_into_blockchain(int fd, blockchain_t *blockchain,
+				uint8_t encoding, uint32_t num_blocks);
+void bswap(uint8_t *p, size_t size);
 int read_attribute(int fd, int encoding, void *attr, size_t size);
 
 /* task 7 */
